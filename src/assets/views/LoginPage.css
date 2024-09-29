@@ -1,0 +1,123 @@
+.login-container{
+    display: flex;
+    height: 100vh;
+    position: relative;
+    justify-content: space-between;
+}
+.title-access{
+    text-align: center;
+}
+.group-form-container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    justify-content: center;
+    gap: 2vw;
+    padding: 100px;
+}
+.title-access{
+    text-align: center;
+}
+.group-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+.span-form{
+    font-weight: 500;
+}
+.input-form{
+    border-radius: 50px;
+    border: 1px solid #E8402A;
+    padding: 10px;
+    caret-color: #E8402A;
+}
+.input-form:focus {
+    font-family: "MuseoModerno", sans-serif;
+    border-color: #ff6e52; 
+    box-shadow: 0 0 8px rgba(255, 110, 82, 0.8);
+    outline: none;
+}
+.password-remind-container{
+    display: flex;
+    justify-content: space-between;
+}
+.remember-container{
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+.span-checkbox{
+    font-weight: 500;
+}
+.ref-span{
+    text-decoration: none;
+    font-weight: 700;
+    color: #E8402A;
+    text-align: end;
+}
+.ref-span:hover{
+    text-decoration: underline;
+}
+.span-btn{
+    font-family: "MuseoModerno", sans-serif;
+    border: 1px solid #E8402A;
+    background-color: #E8402A;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    color: #fff;
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+}
+.span-btn:hover{
+    border: 1px solid #E8402A;
+    background-color: #fff;
+    color: #E8402A;
+}
+.span-remember{
+    text-align: center;
+}
+.a-ref-register{
+    text-decoration: none;
+    font-weight: 700;
+    color: #FF6E52;
+}
+.a-ref-register:hover{
+    text-decoration: underline;
+}
+.social-nets-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw
+
+}
+.group-img-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}
+.rectangle-bg {
+    position: absolute;
+    right: 0; 
+    top: 0;
+    height: 100%;
+    width: 35%; 
+    background: linear-gradient(to bottom right, #F8D261, #FA4A5B);
+    z-index: 1; 
+  }
+.group-img-container img {
+    position: relative;
+    z-index: 3;
+    max-width: 100%;
+    height: auto;
+    margin-right: 10vw;
+  }

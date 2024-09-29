@@ -1,0 +1,91 @@
+.register-container{
+    display: flex;
+    height: 100vh;
+    position: relative;
+    justify-content: space-between;
+}
+.title-access-register{
+    text-align: center;
+}
+.group-form-container-register{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    justify-content: center;
+    gap: 2vw;
+    padding: 10px 100px 10px 80px;
+}
+.title-access-register{
+    text-align: center;
+}
+
+.span-remember-register{
+    text-align: center;
+}
+.a-ref-register-register{
+    text-decoration: none;
+    font-weight: 700;
+    color: #FF6E52;
+}
+.a-ref-register-register:hover{
+    text-decoration: underline;
+}
+.social-nets-container-register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw
+
+}
+.group-img-container-register {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}
+.rectangle-bg-two {
+    position: absolute;
+    left: 0; 
+    top: 0;
+    height: 65%;
+    width: 30%; 
+    background: linear-gradient(to bottom right, #F8D261, #FA4A5B);
+    z-index: 1; 
+    border-radius: 0px;
+}
+.group-img-container-register img {
+    position: relative;
+    z-index: 3;
+    max-width: 80%;
+    height: auto;
+    margin-left: 10vw;
+}
+.btn-change{
+    display: flex;
+    justify-content: space-around;
+    gap: 1vw;
+}
+.btn-rol{
+    font-family: "MuseoModerno", sans-serif;
+    background-color: #E8402A;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    color: #fff;
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+}
+.btn-rol:hover{
+    border: 1px solid #E8402A;
+    background-color: #fff;
+    color: #E8402A;
+}
+.p-desc{
+    text-align: justify;
+}
