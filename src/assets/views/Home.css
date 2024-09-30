@@ -1,0 +1,178 @@
+.a {
+    padding: 150px;
+  }
+  
+  /* Estilos Generales */
+  div {
+    margin-bottom: 50px; /* Espaciado entre divs */
+  }
+  
+  /* Títulos (title) */
+  .Bienvenida-title p,
+  .QueEs-title p,
+  .Quienes-title p,
+  .Dirigido-title p,
+  .Servicios-title p {
+    font-weight: bold;
+    font-size: 32px;
+    text-align: left;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  /* Líneas debajo de los títulos */
+  .Bienvenida-title:after,
+  .QueEs-title:after,
+  .Quienes-title:after,
+  .Dirigido-title:after,
+  .Servicios-title:after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 2px;
+    background-color: #E8402A;
+    margin-top: 5px;
+  }
+  
+  /* Texto (txt) */
+  .Bienvenida-txt p,
+  .QueEs-txt p,
+  .Quienes-txt p,
+  .Dirigido-txt p,
+  .Servicios-txt p {
+    color: grey;
+    font-size: 16px;
+  }
+  
+  /* Sección Bienvenida */
+  .Bienvenida {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .B-izquierda {
+    flex: 1;
+    padding-right: 20px; /* Espacio entre el texto y la imagen */
+  }
+  
+  .B-derecha {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .Bienvenida-img img {
+    width: 100%; /* Ajustar según tamaño deseado */
+  }
+  
+  /* Imagenes */
+  .QueEs-img img,
+  .Quienes-img img,
+  .Dirigido-img img {
+    display: block;
+    margin: 0 auto;
+    width: 150px; /* Ajustar según tamaño deseado */
+  }
+  
+  /* Líneas Divisoras */
+  .LineaDivisoraN {
+    border-bottom: 2px solid #E8402A;
+    position: relative;
+  }
+  
+  .LineaDivisoraN:before,
+  .LineaDivisoraN:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #E8402A;
+    border-radius: 50%;
+    top: -5px;
+  }
+  
+  .LineaDivisoraN:before {
+    left: 0;
+  }
+  
+  .LineaDivisoraN:after {
+    right: 0;
+  }
+  
+  .LineaDivisoraA {
+    border-bottom: 2px solid yellow;
+    position: relative;
+  }
+  
+  .LineaDivisoraA:before,
+  .LineaDivisoraA:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
+    border-radius: 50%;
+    top: -5px;
+  }
+  
+  .LineaDivisoraA:before {
+    left: 0;
+  }
+  
+  .LineaDivisoraA:after {
+    right: 0;
+  }
+  
+  /* Botón */
+  .Bienvenida-Button button {
+    background-color: #E8402A;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .Bienvenida-Button button:hover {
+    background-color: white;
+    color: #E8402A;
+    border: 2px solid #E8402A;
+  }
+  
+  .Servicios-Cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 20px; /* Espacio entre tarjetas */
+    padding: 20px;
+  }
+  
+  .Servicios-Cards div[class^="Card#"] {
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombreado ligero */
+    padding: 20px;
+    text-align: left; /* Alineación del texto a la izquierda */
+  }
+  
+  .Servicios-Cards img {
+    display: block;
+    max-width: 100%; /* Imagen responsiva */
+    margin: 0 auto 20px auto; /* Centrar imagen */
+    height: auto; /* Ajuste automático de la altura */
+  }
+  
+  .Servicios-Cards h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333; /* Color del texto */
+  }
+  
+  .Servicios-Cards p {
+    font-size: 1rem;
+    color: #666; /* Color más claro para el párrafo */
+  }
+  

@@ -1,10 +1,19 @@
-import './App.css'
+import React from 'react'
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Home from "./assets/views/Home";
+import RegisterPage from "./assets/views/RegisterPage";
+import LoginPage from './assets/views/LoginPage';
 
-function App() {
+const App = () => {
   return (
-    <>
-      <h1>VoluntariApp</h1>
-    </>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/RegisterPage" element={<RegisterPage/>} />
+        <Route path="/LoginPage" element={<LoginPage/>} />
+      </Routes>
+    </div>
   )
 }
 

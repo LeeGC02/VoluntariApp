@@ -1,0 +1,102 @@
+/* Footer.css */
+
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@400;600&display=swap');
+
+/* Estilos para el footer */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 50px; /* Más grande */
+  background: linear-gradient(180deg, #a4e5b7 0%, #59bfc5 100%);
+  color: white;
+  font-family: 'MuseoModerno', sans-serif; /* Tipografía aplicada */
+}
+
+/* Sección del footer */
+.footer-section {
+  flex: 1;
+  margin: 0 30px;
+}
+
+.logo-text-container {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo {
+  width: 100px; /* Ajusta el tamaño del logo */
+  margin-right: 15px;
+}
+
+.footer-app-name {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.footer-description {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-rights {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.footer-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #f0f0f0;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.social-icons {
+  font-size: 20px;
+}
+
+/* Asegura que el texto sea blanco */
+.footer-section p {
+  margin: 5px 0;
+  color: #fff;
+}
+
+.footer-section h3 {
+  color: #fff;
+}
+
+/* Asegura que el footer esté en la parte inferior */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Asegura que ocupa toda la altura del viewport */
+}
+
+.b {
+    display: flex;
+    flex-direction: column; /* Organiza el contenido en columnas */
+    min-height: 100vh; /* Asegura que ocupe al menos toda la altura del viewport */
+}
+
+.a {
+    flex: 1; /* Ocupa el espacio restante entre el header y el footer */
+}

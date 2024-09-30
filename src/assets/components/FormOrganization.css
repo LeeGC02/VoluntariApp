@@ -1,0 +1,85 @@
+.form-container-o{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 20px;
+    border: 2px solid#ff0000;
+    max-height: 20vw; 
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #E8402A #fff;
+}
+.form-container-o::-webkit-scrollbar {
+    width: 8px; 
+    border-radius: 10px;
+}
+ .form-container-o::-webkit-scrollbar-thumb {
+    background-color: #E8402A;
+    border-radius: 10px;
+} 
+.form-container-o::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 10px;
+} 
+.form-container-o::-webkit-scrollbar-thumb:hover {
+    background-color: #E8402A;
+    border-radius: 10px;
+}
+.group-form-register-o{
+    display: flex;
+    flex-direction: column;
+}
+.span-form-register-o{
+    font-weight: 500;
+    color: #E8402A;
+}
+.input-form-register-o{
+    font-family: "MuseoModerno", sans-serif;
+    border-radius: 50px;
+    background-color: transparent;
+    border: 1px solid #E8402A;
+    padding: 10px;
+    caret-color: #E8402A;
+}
+.input-form-register-o::placeholder{
+    color: #e8402a6e;
+}
+.input-form-register-o:focus {
+    border-color: #E8402A; 
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    outline: none;
+}
+.combo-container-o{
+    font-family: "MuseoModerno", sans-serif;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #E8402A;
+    background-color: transparent;
+    color: #E8402A;
+
+}
+.combo-container-o:focus {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    outline: none;
+    border: 1px solid #E8402A;
+}
+.combo-edu-o{
+    background-color: #fff;
+}
+.span-btn-registro-o{
+    font-family: "MuseoModerno", sans-serif;
+    border: 1px solid #E8402A;
+    background-color: #E8402A;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    color: #fff;
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+}
+.span-btn-registro-o:hover{
+    background-color: #fff;
+    color: #E8402A;
+}
