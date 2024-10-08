@@ -1,0 +1,89 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 150px; /* Ajusta los valores de padding para mantener equilibrio lateral */
+    background-color: white;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave y grande */
+    padding-top: 50px;
+    position: fixed; /* Fija el header en la parte superior */
+    top: 0; /* Posiciona el header en la parte superior */
+    left: 0; /* Alinea el header a la izquierda */
+     right: 0; /* Alinea el header a la derecha */
+    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+}
+  
+  /* Resto del código se mantiene igual */
+  
+  .img-title-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .img-VoluntariApp {
+    width: 50px; /* Ajusta el tamaño del logo */
+    height: auto;
+    margin-right: 10px; /* Espacio entre la imagen y el título */
+  }
+  
+  .title-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    font-family: 'MuseoModerno', sans-serif; /* Tipografía para el texto del medio */
+  }
+  
+  .ref-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre los enlaces */
+  }
+  
+  .ref-span {
+    color: #696969; /* Color plomo */
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .ref-span:hover {
+    color: black; /* Al pasar el mouse */
+  }
+  
+  .btn-container {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 5px; /* Espacio de 5px entre los botones */
+  }
+  
+  .btn-login, .btn-signup {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px; /* Bordes redondeados */
+    transition: all 0.3s ease;
+  }
+  
+  .btn-login {
+    border: 2px solid #E8402A;
+    background-color: white;
+    color: #E8402A;
+  }
+  
+  .btn-login:hover, .btn-login:active {
+    background-color: #E8402A;
+    color: white;
+  }
+  
+  .btn-signup {
+    background-color: #E8402A;
+    border: none;
+    color: white;
+  }
+  
+  .btn-signup:hover, .btn-signup:active {
+    background-color: white;
+    color: #E8402A;
+    border: 2px solid #E8402A;
+  }
+  

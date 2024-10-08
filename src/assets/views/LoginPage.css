@@ -15,7 +15,6 @@
     position: relative;
     z-index: 2;
     justify-content: center;
-    gap: 1vw;
 }
 .title-access{
     text-align: center;

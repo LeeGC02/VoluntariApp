@@ -99,37 +99,37 @@ const Home = () => {
             <div className='Servicios-Cards'>
 
                 <div className='Card#1'>
-                    <img src="/public/images/Frame.png" alt="Pic1" />
+                    <img src="/images/Frame.png" alt="Pic1" />
                     <h1>Publicación de Oportunidades</h1>
                     <p>Las organizaciones publican proyectos con detalles específicos para voluntarios, facilitando la búsqueda de la oportunidad adecuada.</p>
                 </div>
 
                 <div className='Card#2'>
-                    <img src="/public/images/Frame.png" alt="Pic1" />
+                    <img src="/images/Frame.png" alt="Pic1" />
                     <h1>Búsqueda y Aplicación</h1>
                     <p>Los voluntarios pueden acceder a un catálogo filtrado por ubicación, actividad y áreas de interés, postulándose fácilmente.</p>
                 </div>
 
                 <div className='Card#3'>
-                    <img src="/public/images/Frame.png" alt="Pic1" />
+                    <img src="/images/Frame.png" alt="Pic1" />
                     <h1>Gestión de Perfiles</h1>
                     <p>Voluntarios y organizaciones personalizan sus perfiles, mostrando habilidades, experiencias y proyectos para encontrar mejores coincidencias.</p>
                 </div>
 
                 <div className='Card#4'>
-                    <img src="/public/images/Frame.png" alt="Pic1" />
+                    <img src="/images/Frame.png" alt="Pic1" />
                     <h1>Calificación y Reseñas</h1>
                     <p>Los voluntarios califican organizaciones y dejan reseñas, promoviendo transparencia y decisiones informadas.</p>
                 </div>
 
                 <div className='Card#5'>
-                    <img src="/public/images/Frame.png" alt="Pic1" />
+                    <img src="/images/Frame.png" alt="Pic1" />
                     <h1>Gestión de Proyectos</h1>
                     <p>Herramientas para que las organizaciones gestionen convocatorias y el progreso de proyectos de manera eficiente.</p>
                 </div>
 
                 <div className='Card#6'>
-                    <img src="/public/images/Frame.png" alt="Pic1" />
+                    <img src="/images/Frame.png" alt="Pic1" />
                     <h1>Notificaciones y Alertas</h1>
                     <p>Notificaciones personalizadas y recordatorios de actividades y oportunidades relevantes.</p>
                 </div>

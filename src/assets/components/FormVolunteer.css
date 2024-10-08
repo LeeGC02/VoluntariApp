@@ -5,7 +5,6 @@
     background-color: #fff;
     border-radius: 20px;
     border: 2px solid#E8402A;
-    gap: 3vw;
     max-height: 20vw; 
     overflow-y: auto;
     scrollbar-width: thin;
@@ -32,7 +31,6 @@
 .group-form-register{
     display: flex;
     flex-direction: column;
-    gap: 2vw;
 
 }
 .span-form-register{
