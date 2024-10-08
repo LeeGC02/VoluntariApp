@@ -10,12 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@iconify/react": "^5.0.2",
     "firebase": "^10.13.2",
     "prop-types": "^15.8.1",
->>>>>>> 8b45020 (implementation of firebase in login and register)
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
