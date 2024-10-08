@@ -8,15 +8,14 @@
     text-align: center;
 }
 .group-form-container{
+    align-items: center;
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 20px;
     position: relative;
     z-index: 2;
     justify-content: center;
-    gap: 2vw;
-    padding: 100px;
+    gap: 1vw;
 }
 .title-access{
     text-align: center;
@@ -74,10 +73,31 @@
     border-radius: 20px;
     padding: 10px;
 }
-.span-btn:hover{
+.span-btn-g{
+    font-family: "MuseoModerno", sans-serif;
     border: 1px solid #E8402A;
     background-color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
     color: #E8402A;
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-direction: row-reverse;
+}
+.span-btn:hover{
+    background-color: #fff;
+    color: #E8402A;
+}
+.span-btn-g:hover{
+    
+    background-color: #E8402A;
+    color: #fff;
 }
 .span-remember{
     text-align: center;
@@ -121,3 +141,10 @@
     height: auto;
     margin-right: 10vw;
   }
+
+.form-login{
+    gap: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
