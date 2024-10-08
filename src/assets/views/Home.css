@@ -3,10 +3,12 @@
   }
   
   /* Estilos Generales */
+  /*
   div {
-    margin-bottom: 50px; /* Espaciado entre divs */
+    margin-bottom: 50px;  Espaciado entre divs 
   }
-  
+  */
+
   /* Títulos (title) */
   .Bienvenida-title p,
   .QueEs-title p,
@@ -49,11 +51,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 50px;
   }
   
   .B-izquierda {
     flex: 1;
     padding-right: 20px; /* Espacio entre el texto y la imagen */
+    margin-bottom: 50px;
   }
   
   .B-derecha {
@@ -61,6 +65,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-bottom: 50px;
   }
   
   .Bienvenida-img img {
@@ -148,6 +153,7 @@
     grid-template-columns: repeat(3, 1fr); /* 3 columnas */
     gap: 20px; /* Espacio entre tarjetas */
     padding: 20px;
+    
   }
   
   .Servicios-Cards div[class^="Card#"] {

@@ -33,10 +33,12 @@ const Home = () => {
             
 
         </div>
-
+        <br />
         <div className='LineaDivisoraN'>
 
         </div>
+        <br />
+
 
 
 
@@ -79,10 +81,11 @@ const Home = () => {
                 <img className='img-VoluntariApp' src="/VoluntariAppLogo.png" alt="logo VoluntariApp" />
             </div>
         </div>
-
+        <br />
         <div className='LineaDivisoraA'>
             
         </div>
+        <br />
 
 
 

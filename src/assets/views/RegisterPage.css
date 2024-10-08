@@ -8,15 +8,14 @@
     text-align: center;
 }
 .group-form-container-register{
+    align-items: center;
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 20px;
     position: relative;
     z-index: 2;
     justify-content: center;
-    gap: 2vw;
-    padding: 10px 100px 10px 80px;
+    gap: 1vw;
 }
 .title-access-register{
     text-align: center;
@@ -88,4 +87,20 @@
 }
 .p-desc{
     text-align: justify;
+}
+.form-register{
+    gap: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.input-form{
+    font-family: "MuseoModerno", sans-serif;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    max-width: 25%;
+    height: auto;
 }
