@@ -1,0 +1,53 @@
+.vol-profile-container{
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: rgb(250, 246, 240);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;    
+}
+.vol-header-profile{
+    background-color: red;
+    height: 180px;
+    border-radius: 7px;
+    border: 2px solid white;
+}
+.vol-header-profile{
+    height: 200px;
+    position: relative;
+    border-radius: 10px;
+    border: 3px solid white;
+    background: linear-gradient(to right, #F8D261, #FA4A5B);
+    z-index: 1;
+    position: relative;
+}
+.vol-avatar {
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    border: 3px solid white;
+    position: absolute;
+    z-index: 2;
+    top: 140px;
+    left: 60px;
+}
+.vol-information-profile {
+    margin-left: 250px; 
+}
+.p-profile{
+    text-align: justify;
+    font-size: 14px;
+}
+.span-profile{
+    text-align: justify;
+    font-size: 12px;
+    color: #979899;
+}
+.hr-profile{
+    border: none;
+    background-color: #FA4A5B;
+    height: 1px;
+    width: auto;
+}

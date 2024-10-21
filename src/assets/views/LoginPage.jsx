@@ -7,11 +7,15 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const auth = useAuth();
   const { user } = auth;
-  const {displayName} = auth.user;
+  //const {displayName} = auth.user;
   // console.log(displayName);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate(); 
+  //manejo de errores 
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
   
   useEffect(() => {
     if (user) {
@@ -19,16 +23,25 @@ const LoginPage = () => {
     }
   }, [user, navigate]);
   
+  // login with email
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!email) {
+      return setError("Ingresa un correo por favor");
+    }
+    if (!password) {
+      return setError("Ingresa tu contraseña por favor");
+    }
     try {
       await auth.login(email, password);
       navigate("/HomePage");
+      setError("");
     } catch (error) {
       console.error("Error en el login", error);
+      setError("Credenciales inválidas. Por favor, intenta de nuevo.");
     }
   };
-
+  // login with google
   const handleGoogle = async (e) => {
     e.preventDefault();
     try {
@@ -36,8 +49,25 @@ const LoginPage = () => {
       navigate("/HomePage");
     } catch (error) {
       console.error("Error en el login con Google", error);
+      setError("Error al iniciar sesión con Google. Intenta de nuevo.");
     }
   };
+  // reset Password
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    if (!email) return setError("Por favor introduce tu email");
+    console.log('reset');
+    try {
+      await auth.resetPassword(email);
+      setMessage("Correo de restablecimiento enviado. Revisa tu bandeja de entrada.");
+      setError("");
+    } catch (error) {
+      setError("Error al enviar el correo de restablecimiento. Por favor, intenta de nuevo.");
+      setMessage("");
+      console.error("Error en reset password", error);
+    }
+  };
+   
 
   //console.log(email, password, "stateLogin");
   return (
@@ -45,7 +75,7 @@ const LoginPage = () => {
       <div className='group-form-container'>
         <img className='logo' src="/VoluntariAppLogo.png" alt="logo" />
         <h1 className='title-access'>¡Bienvenido de nuevo!</h1>
-        {displayName && <h3>gracias {displayName}</h3> }
+        {user && user.displayName && <h3>Gracias, {user.displayName}</h3>}
         <form className='form-login'>
           <div className='group-form'>
               <span className='span-form'>Email: </span>
@@ -53,16 +83,14 @@ const LoginPage = () => {
           </div>
           <div className='group-form'>
               <span className='span-form'>Contraseña: </span>
-              <input className='input-form' type="password" onChange={(e)=>setPassword(e.target.value)} />
+              <input className='input-form' required type="password" onChange={(e)=>setPassword(e.target.value)} />
           </div>
-          <div className="password-remind-container">
-              <div className="remember-container">
-                  <input className='input-checkbox' type="checkbox" />
-                  <span className='span-checkbox' >Recuerdame</span>
-              </div>
-              <a className='ref-span' href="#forget">¿Olvidaste tu contraseña?</a>
+          {error && <div className="error-message">{error}</div>}
+          {message && <div className="success-message">{message}</div>}
+          <div className="password-remind-container">   
+              <a className='ref-span' href="#forget" onClick={(e)=>handleResetPassword(e)} >¿Olvidaste tu contraseña?</a>
           </div>
-          <div className="btn-container">
+          <div className="btn-container ">
               <button className='span-btn' onClick={(e)=>handleLogin(e)} >Ingresar</button>
           </div>
           <div className="btn-container">

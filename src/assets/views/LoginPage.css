@@ -22,7 +22,6 @@
 .group-form{
     display: flex;
     flex-direction: column;
-    gap: 1vw;
 }
 .span-form{
     font-weight: 500;
@@ -41,7 +40,7 @@
 }
 .password-remind-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 .remember-container{
     display: flex;
@@ -55,7 +54,6 @@
     text-decoration: none;
     font-weight: 700;
     color: #E8402A;
-    text-align: end;
 }
 .ref-span:hover{
     text-decoration: underline;
@@ -146,4 +144,18 @@
     display: flex;
     flex-direction: column;
     width: 50%;
+}
+.error-message{
+    color: red;
+    background-color: rgba(255, 0, 0, 0.158);
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+.success-message{
+    color: green;
+    background-color: rgba(0, 128, 0, 0.123);
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
 }

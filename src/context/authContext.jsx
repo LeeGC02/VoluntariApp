@@ -2,29 +2,39 @@ import { useState, useEffect } from "react";
 import { auth } from "../firebase/firebase.config";
 import PropTypes from "prop-types";
 import { createContext, useContext } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged} from "firebase/auth";
+import { 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    signOut, 
+    onAuthStateChanged, 
+    sendPasswordResetEmail
+} from "firebase/auth";
 
 export const authContext = createContext();
 
 export const useAuth = () => {
-    const context = useContext(authContext)
+    const context = useContext(authContext);
     if(!context){
-        console.log("error creating auth context")
+        console.log("error creating auth context");
     }
     return context;
 };
 
 export function AuthProvider ({children}) {
-
-    const[user, setUser] = useState("")
+    // usuario
+    const [loading, setLoading] = useState(true); 
+    const[user, setUser] = useState(null);
     useEffect(()=>{
-        const suscribed = onAuthStateChanged(auth, (currentUser)=>{
+        const suscribed = onAuthStateChanged(auth, (currentUser) => {
             if(!currentUser){
-                console.log("no hay usuario suscrito")
-                setUser("")
+                console.log("no hay usuario suscrito");
+                setUser(null);
             }else{
-                setUser(currentUser)
+                setUser(currentUser);
             }
+            setLoading(false);
         })
         return () => suscribed()
     }, []);
@@ -32,19 +42,23 @@ export function AuthProvider ({children}) {
     const register = async (email, password) => {
         const response = await createUserWithEmailAndPassword (auth, email, password);
         console.log(response);
+        return response;
     };
     const login = async (email, password) => {
         const response = await signInWithEmailAndPassword (auth, email, password);
         console.log(response);
+        return response;
     };
     const loginWithGoogle = async () => {
-        const responseGoogle = new GoogleAuthProvider()
-        return await signInWithPopup(auth, responseGoogle)
+        const responseGoogle =  new GoogleAuthProvider();
+        return await signInWithPopup(auth, responseGoogle);
     };
     const logout = async () => {
-        const response = await signOut(auth)
-        console.log(response)
+        const response = await signOut(auth);
+        console.log(response);
     };
+
+    const resetPassword = async (email) => sendPasswordResetEmail(auth, email);
     return (
         <authContext.Provider 
             value={{
@@ -53,9 +67,10 @@ export function AuthProvider ({children}) {
                 loginWithGoogle,
                 logout,
                 user,
+                resetPassword,
             }}
         >
-            {children}
+            {!loading ? children : <div>Cargando...</div>} 
         </authContext.Provider>
     );
 }

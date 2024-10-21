@@ -1,17 +1,15 @@
 //import React from 'react'
 import './App.css';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from "./assets/views/Home";
 import RegisterPage from "./assets/views/RegisterPage";
 import LoginPage from './assets/views/LoginPage';
-import { AuthProvider, useAuth } from './context/authContext';
+import { AuthProvider } from './context/authContext';
 import HomePage from './assets/views/HomePage';
-import PropTypes from "prop-types";
+import ProtectedRouter from './assets/components/ProtectedRouter';
+import VolunteerPage from './assets/views/VolunteerPage';
+import OrganizationPage from './assets/views/OrganizationPage';
 
-const ProtectedRoute = ({children}) => {
-  const auth = useAuth();
-  return auth.user ? children : <Navigate to = "/LoginPage"/>
-};
 
 const App = () => {
   return (
@@ -21,15 +19,13 @@ const App = () => {
           <Route path="/" element={<Home/>} />
           <Route path="/RegisterPage" element={<RegisterPage/>} />
           <Route path="/LoginPage" element={<LoginPage/>} />
-          <Route path="/HomePage" element={<ProtectedRoute><HomePage/></ProtectedRoute>}/>
+          <Route path="/HomePage" element={<ProtectedRouter><HomePage/></ProtectedRouter>}/>
+          <Route path="/VolunteerPage" element={<ProtectedRouter> <VolunteerPage/> </ProtectedRouter>}/>
+          <Route path="/OrganizationPage" element={<ProtectedRouter> <OrganizationPage/> </ProtectedRouter>}/>
         </Routes>
       </div>
     </AuthProvider>
   )
 }
-// Validación de las props
-ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
-export default App
+export default App;

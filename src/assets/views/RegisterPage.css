@@ -103,3 +103,14 @@
     max-width: 25%;
     height: auto;
 }
+.combo-rol-container{
+    font-family: "MuseoModerno", sans-serif;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #E8402A;
+    background-color: transparent;
+}
+.combo-rol-container:focus {
+    outline: none;
+    border: 1px solid #E8402A;
+}

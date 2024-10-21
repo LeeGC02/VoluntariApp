@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAcOyUaPB4VrG_xjv_xDeH-oI-BZUd7T6I",
   authDomain: "voluntariapp-42cbd.firebaseapp.com",
@@ -15,3 +17,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 //const analytics = getAnalytics(app);
+// configuracion Firestore
+export const db = getFirestore(app);
