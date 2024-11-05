@@ -1,0 +1,51 @@
+.data-vol-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.portrate{
+    height: 12vw;
+    width: 100%;
+    border-radius: 5px;
+    background: linear-gradient(to right, #f8d261, #fa4a5b);
+}
+.container-data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+}
+.photo-vol{
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  border: 3px solid white;
+  position: absolute;
+  z-index: 2;
+  top: 140px;
+}
+.btn-edit{
+    font-family: "MuseoModerno", sans-serif;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background-color: #097181;
+    color: #fff;
+    padding: 5px 10px;
+    width: 20%;
+}
+.btn-edit:hover{
+    font-family: "MuseoModerno", sans-serif;
+    border: 1px solid #097181;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #097181;
+    padding: 5px 10px;
+    width: 20%;
+    font-weight: 700;
+}
+.edit-coso{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}

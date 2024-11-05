@@ -1,0 +1,84 @@
+.header-webapp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e8402a;
+  padding: 10px 20px;
+  color: #fff;
+  position: fixed; /* Fija el header en la parte superior */
+  top: 0; /* Posiciona el header en la parte superior */
+  left: 0; /* Alinea el header a la izquierda */
+  right: 0; /* Alinea el header a la derecha */
+  z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+}
+.webapp-name {
+  display: flex;
+  align-items: center;
+}
+.icons-actions-container {
+  display: flex;
+  gap: 10px;
+  font-weight: 500;
+}
+.icons-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.searching-bar {
+  font-family: "MuseoModerno", sans-serif;
+  border-radius: 50px;
+  border: none;
+  padding: 10px;
+  caret-color: #e8402a;
+  position: relative;
+  width: 40%;
+}
+.searching-bar:focus {
+  font-family: "MuseoModerno", sans-serif;
+  border-color: #ff6e52;
+  box-shadow: 0 0 8px rgba(254, 254, 254, 0.8);
+  outline: none;
+}
+
+.pro {
+  position: relative;
+}
+.select-profile {
+  font-family: "MuseoModerno", sans-serif;
+  background-color: #e8402a;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  font-weight: 500;
+  width: 40px;
+}
+
+.select-profile:focus {
+  outline: none;
+}
+
+.select-profile option {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+@media (max-width: 850px) {
+  .header-webapp {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .searching-bar {
+    width: 80%;
+    margin: 10px 0;
+  }
+
+  .icons-actions-container {
+    gap: 10px;
+  }
+}

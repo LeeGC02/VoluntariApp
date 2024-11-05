@@ -9,7 +9,7 @@ import HomePage from './assets/views/HomePage';
 import ProtectedRouter from './assets/components/ProtectedRouter';
 import VolunteerPage from './assets/views/VolunteerPage';
 import OrganizationPage from './assets/views/OrganizationPage';
-
+import VolunteerProfile from './assets/views/VolunteerProfile';
 
 const App = () => {
   return (
@@ -22,6 +22,7 @@ const App = () => {
           <Route path="/HomePage" element={<ProtectedRouter><HomePage/></ProtectedRouter>}/>
           <Route path="/VolunteerPage" element={<ProtectedRouter> <VolunteerPage/> </ProtectedRouter>}/>
           <Route path="/OrganizationPage" element={<ProtectedRouter> <OrganizationPage/> </ProtectedRouter>}/>
+          <Route path="/VolunteerPage/VolunteerProfile" element={<ProtectedRouter> <VolunteerProfile /> </ProtectedRouter>} />
         </Routes>
       </div>
     </AuthProvider>

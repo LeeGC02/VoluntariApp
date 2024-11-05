@@ -45,7 +45,7 @@ const ProtectedRouter = ({children}) => {
   }
 
   // Evitar redireccionamientos cíclicos
-  if (role === 'volunteer' && location.pathname !== '/VolunteerPage') {
+  if (role === 'volunteer' && !location.pathname.startsWith('/VolunteerPage')) {
     return <Navigate to="/VolunteerPage" />;
   } else if (role === 'organization' && location.pathname !== '/OrganizationPage') {
     return <Navigate to="/OrganizationPage" />;

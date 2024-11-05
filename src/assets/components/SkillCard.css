@@ -1,0 +1,28 @@
+.list-container{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.list-container span{
+    background-color: beige;
+    border-radius: 20px;
+    padding: 10px;
+}
+.skill-container button {
+    font-family: "MuseoModerno", sans-serif;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    padding: 10px;
+    border: 1px solid transparent;
+    background-color: #e8402a;
+    color: #fff;
+}
+.skill-container button:hover{
+    background-color: #fff;
+    border: 1px solid #e8402a;
+    color: #e8402a;
+    font-weight: 600;
+}

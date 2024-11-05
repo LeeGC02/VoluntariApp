@@ -1,56 +1,132 @@
 import "./VolunteerProfile.css";
-import { useAuth } from "../../context/authContext";
-import { useNavigate } from 'react-router-dom';
+import HeaderWebApp from "../components/HeaderWebApp";
+import OrganizationCard from "../components/OrganizationCard";
+import ExperienceCard from "../components/ExperienceCard";
+import ArchievementCard from "../components/ArchievementCard";
+import ReviewCard from "../components/ReviewCard";
+import VolunteerDataCard from "../components/VolunteerDataCard";
+import SkillCard from "../components/SkillCard";
 
 const VolunteerProfile = () => {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
+  const dataVol = [
+    {
+      nameVol: "Juan Perez",
+      descVol: "Passionate Environmental Activist | Community Organizer",
+      location: "Sausalito, California, United States",
+      email: "juan.perez@gmail.com",
+      age: 21,
+      aboutVol:
+        "Dedicated volunteer with 5+ years of experience in environmental conservation and community organizing. Committed to making a positive impact through grassroots initiatives and sustainable practices.",
+      archievement:
+        "Organized a city-wide recycling campaign that increased recycling rates by 30%",
+      review:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium modi nostrum qui sed ab soluta recusandae sit esse dignissimos iure voluptatibus odio dolores, minima nobis consequatur temporibus laudantium corrupti ipsam!",
+    },
+  ];
+  const dataOrg = [
+    {
+      nameOrg: "Lead Volunteer",
+      descOrg: "Green Earth Initiative",
+      startDate: "Jan 2020",
+      endDate: "Present",
+    },
+    {
+      nameOrg: "Co-Organizer",
+      descOrg: "Beach Cleanup Campaign",
+      startDate: "Mar 2018",
+      endDate: "Dec 2019",
+    },
+    {
+      nameOrg: "Coordinator",
+      descOrg: "Tree Planting Drive",
+      startDate: "Jun 2017",
+      endDate: "Feb 2018",
+    },
+  ];
+  const combinedData = dataOrg.map((org, index) => ({
+    ...org,
+    nameVol: dataVol[index]?.nameVol || "",
+    review: dataVol[index]?.review || "",
+    archievement: dataVol[index]?.archievement || "",
+  }));
 
-  const handleLogout = async () => {
-    await logout();
-    navigate("/LoginPage");
-  }
   return (
-    <div className="vol-profile-container">
-        <button onClick={handleLogout}>Cerrar Sesion</button>
-        <div className="vol-header-profile"></div>
-        <div className="vol-information-container">
-            {/* {photoURL && <img className="vol-avatar" src={photoURL} alt={displayName}/> } */}
-            <img className="vol-avatar" src="/images/avatar-photo.svg" alt="avartar-volunteer" />
-            <div className="vol-information-profile">
-                <h2>Nombre de usuario</h2>
-                {/* {displayName && <h2>{displayName}</h2> } */}
-                <p className="p-profile">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis beatae quibusdam aperiam, excepturi dolor voluptas ratione voluptatem delectus reprehenderit itaque eos, totam praesentium nesciunt animi. Quaerat sunt voluptas laudantium distinctio.</p>
-                <div className="location">
-                    <span className="span-profile">ubicacion de la persona</span>
-                </div>
-            </div>
-            <div className="about-container">
-                <h3>A cerca de</h3>
-                <hr className="hr-profile"/>
-                <p className="p-profile">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora, odit. Animi suscipit facilis doloremque placeat architecto. At aspernatur, possimus pariatur tenetur ex hic asperiores incidunt commodi voluptatem dicta accusamus nobis.</p>
-            </div>
-            <div className="experience-container">
-                <h3>Experiencia del Voluntario</h3>
-                <hr className="hr-profile"/>
-                <div>
-                    <span className="span-profile">nose</span>
-                    <span className="span-profile">rol de la persona</span>
-                    <span className="span-profile">calendario</span>
-                </div>
-            </div>
-            <div className="skills-container">
-                <h3>Habilidades del Voluntario</h3>
-                <hr className="hr-profile"/>
-            </div>
-            <div className="achievements-container">
-                <h3>Logros</h3>
-                <hr className="hr-profile"/>
-                <p className="p-profile">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum dolores omnis architecto est adipisci, eligendi neque beatae. Dolorem ipsum pariatur dolorum dolore, ducimus architecto distinctio, perspiciatis commodi doloribus hic esse!</p>
-            </div>
+    <div className="">
+      <HeaderWebApp />
+      <div className="grid-container">
+        <div className="uno">
+          {dataVol.map((vol, index) => (
+            <VolunteerDataCard
+              key={index}
+              nameVol={vol.nameVol}
+              descVol={vol.descVol}
+              location={vol.location}
+              email={vol.email}
+              age={vol.age}
+              aboutVol={vol.aboutVol}
+            />
+          ))}
         </div>
+        <div className="dos">
+          <h4>Otras Organizaciones</h4>
+          {dataOrg.map((org, index) => (
+            <OrganizationCard
+              key={index}
+              nameOrg={org.nameOrg}
+              descOrg={org.descOrg}
+            />
+          ))}
+        </div>
+        <div className="tres">
+          <h4>Experiencia de Voluntariado</h4>
+          <div className="tres-otro">
+            {dataOrg.map((org, index) => (
+              <ExperienceCard
+                key={index}
+                nameOrg={org.nameOrg}
+                descOrg={org.descOrg}
+                startDate={org.startDate}
+                endDate={org.endDate}
+              />
+            ))}
+            <button className="btn-add-experience">Añadir experiencia +</button>
+          </div>
+        </div>
+        <div className="cuatro">
+          <h4>Aptitudes</h4>
+          <SkillCard/>
+        </div>
+        <div className="cinco">
+          <h4>Logros de Voluntariado</h4>
+          <div className="cinco-otro">
+            {dataVol.map((vol, index) => (
+              <ArchievementCard key={index} archievement={vol.archievement} />
+            ))}
+            <button className="btn-add-experience">Añadir Logro +</button>
+          </div>
+        </div>
+        <div className="seis">
+          <div className="seis-otro">
+            <h4>Comentarios de Voluntariado</h4>
+            <button className="btn-add-experience">Añadir Comentario +</button>
+          </div>
+          <div className="seis-otro-dos">
+            {combinedData.map((items, index) => {
+              return items.review ? (
+                <ReviewCard
+                  key={index}
+                  nameOrg={items.nameOrg}
+                  descOrg={items.descOrg}
+                  nameVol={items.nameVol}
+                  review={items.review}
+                />
+              ) : null;
+            })}
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default VolunteerProfile
+export default VolunteerProfile;

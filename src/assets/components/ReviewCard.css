@@ -1,0 +1,23 @@
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  padding: 20px;
+}
+.review-org {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.name-review-org {
+  display: flex;
+  flex-direction: column;
+}
+.name-review-org h5,
+span {
+  margin: 0;
+  font-size: small;
+}
