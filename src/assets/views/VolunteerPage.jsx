@@ -1,5 +1,5 @@
-//import React from 'react'
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import { db, auth } from "../../firebase/firebase.config";
 import { doc, getDoc } from "firebase/firestore";
 import FormVolunteer from "../components/FormVolunteer";
@@ -9,6 +9,8 @@ import "./VolunteerPage.css";
 const VolunteerPage = () => {
   const [formularioCompletado, setFormularioCompletado] = useState(null);
   const [nombreUsuario, setNombreUsuario] = useState("");
+  const navigate = useNavigate(); // Inicializa useNavigate para manejar la navegación
+
   useEffect(() => {
     const checkFormularioCompleto = async () => {
       const user = auth.currentUser;
@@ -21,7 +23,6 @@ const VolunteerPage = () => {
 
           setFormularioCompletado(isComplete);
           setNombreUsuario(data.nombreUsuario || "Voluntario");
-          // setFormularioCompletado(docSnap.data().formularioCompletado || false);
         } else {
           console.log("No existe el documento del usuario en Firestore");
           setFormularioCompletado(false); // Usuario no tiene datos, se muestra el formulario
@@ -33,6 +34,11 @@ const VolunteerPage = () => {
     };
     checkFormularioCompleto();
   }, []);
+
+  const handleNavigateToLanding = () => {
+    navigate("/LandingPage"); // Ruta a la que deseas navegar
+  };
+
   return (
     <div>
       <HeaderWebApp />
@@ -43,8 +49,11 @@ const VolunteerPage = () => {
         ) : (
           <p>Gracias por completar los datos.</p>
         )}
+        
         Contenido de inicio
+        
       </main>
+      <button onClick={handleNavigateToLanding}>Cotinuar</button>
     </div>
   );
 };

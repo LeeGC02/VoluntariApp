@@ -10,6 +10,8 @@ import ProtectedRouter from './assets/components/ProtectedRouter';
 import VolunteerPage from './assets/views/VolunteerPage';
 import OrganizationPage from './assets/views/OrganizationPage';
 import VolunteerProfile from './assets/views/VolunteerProfile';
+import ActForm from './assets/views/ActForm';
+import LandingPage from './assets/views/LandingPage';
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
           <Route path="/VolunteerPage" element={<ProtectedRouter> <VolunteerPage/> </ProtectedRouter>}/>
           <Route path="/OrganizationPage" element={<ProtectedRouter> <OrganizationPage/> </ProtectedRouter>}/>
           <Route path="/VolunteerPage/VolunteerProfile" element={<ProtectedRouter> <VolunteerProfile /> </ProtectedRouter>} />
+          <Route path="/OrganizationPage/ActForm" element={<ActForm />}/>
+          <Route path="/LandingPage" element={<LandingPage />}/>
         </Routes>
       </div>
     </AuthProvider>

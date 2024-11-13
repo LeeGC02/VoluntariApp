@@ -1,0 +1,44 @@
+.actividades-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .tarjeta-actividad {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .tarjeta-imagen img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .tarjeta-info {
+    padding: 15px;
+  }
+  
+  .tarjeta-titulo {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .tarjeta-boton-detalles {
+    background-color: #ff6e52;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .tarjeta-boton-detalles:hover {
+    background-color: #ff9e7a;
+  }
+  
