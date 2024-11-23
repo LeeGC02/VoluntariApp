@@ -30,16 +30,18 @@
   font-family: "MuseoModerno", sans-serif;
   border-radius: 50px;
   border: none;
-  padding: 10px;
+  padding: 5px;
   caret-color: #e8402a;
   position: relative;
   width: 40%;
+  color: black;
 }
 .searching-bar:focus {
   font-family: "MuseoModerno", sans-serif;
   border-color: #ff6e52;
   box-shadow: 0 0 8px rgba(254, 254, 254, 0.8);
   outline: none;
+  color: black;
 }
 
 .pro {

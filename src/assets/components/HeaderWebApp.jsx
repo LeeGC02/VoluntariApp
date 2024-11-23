@@ -25,13 +25,13 @@ const HeaderWebApp = () => {
     
     <div>
       <header className='header-webapp'>
-        <div className="webapp-name">
+        <div className="webapp-name ">
           <img className='img-VoluntariApp' src="/VoluntariAppLogo.png" alt="logo VoluntariApp" />
-          <h2>VoluntariApp</h2>
+          <h2 className=' font-extrabold text-xl '>VoluntariApp</h2>
         </div>
         <input className='searching-bar' type="text" placeholder='🔎 Buscar' />
         <div className='icons-actions-container'>
-          <div className="icons-action">
+          <div className="icons-action " onClick={() => navigate("/VolunteerPage/ProductPage")} >
             <Icon icon="ic:baseline-local-grocery-store" width="24" height="24" style={{ color: "#fff" }} />
             <span>Tienda</span>
           </div>
