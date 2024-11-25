@@ -6,7 +6,6 @@ const QrCard = () => {
       <div className="w-60">
         <img src="/qrPrueba.jpg" alt="qrx" />
       </div>
-      
     </div>
   );
 };

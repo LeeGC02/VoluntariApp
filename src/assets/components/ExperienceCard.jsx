@@ -33,9 +33,9 @@ const ExperienceCard = ({ nameOrg, descOrg, startDate, endDate }) => {
 };
 
 ExperienceCard.propTypes = {
-  nameOrg: PropTypes.string.isRequired, // `nameOrg` debe ser una cadena de texto y es obligatorio
-  descOrg: PropTypes.string.isRequired, // `descOrg` debe ser una cadena de texto y es obligatorio
-  startDate: PropTypes.string.isRequired, // Las fechas son obligatorias
+  nameOrg: PropTypes.string.isRequired, 
+  descOrg: PropTypes.string.isRequired, 
+  startDate: PropTypes.string.isRequired, 
   endDate: PropTypes.string.isRequired,
 };
 

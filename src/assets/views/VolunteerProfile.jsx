@@ -77,7 +77,9 @@ const VolunteerProfile = () => {
           ))}
         </div>
         <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-2">
-          <h4 className="text-xl font-semibold mb-4">Experiencia de Voluntariado</h4>
+          <h4 className="text-xl font-semibold mb-4">
+            Experiencia de Voluntariado
+          </h4>
           <div className="space-y-4">
             {dataOrg.map((org, index) => (
               <ExperienceCard
@@ -101,12 +103,13 @@ const VolunteerProfile = () => {
             {dataVol.map((vol, index) => (
               <ArchievementCard key={index} archievement={vol.archievement} />
             ))}
-            <button className="btn-primary">Añadir Logro +</button>
           </div>
         </div>
         <div className="bg-white shadow-md rounded-lg p-6 col-span-6">
           <div className="flex items-center justify-between mb-4">
-            <h4 className="text-xl font-semibold">Comentarios de Voluntariado</h4>
+            <h4 className="text-xl font-semibold">
+              Comentarios de Voluntariado
+            </h4>
             <button className="btn-primary">Añadir Comentario +</button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

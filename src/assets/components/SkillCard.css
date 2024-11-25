@@ -1,4 +1,4 @@
-.list-container{
+/*.list-container{
     display: flex;
     gap: 10px;
     align-items: center;
@@ -8,7 +8,7 @@
     border-radius: 20px;
     padding: 10px;
 }
-.skill-container button {
+ .skill-container button {
     font-family: "MuseoModerno", sans-serif;
     display: flex;
     align-items: center;
@@ -25,4 +25,4 @@
     border: 1px solid #e8402a;
     color: #e8402a;
     font-weight: 600;
-}
+} */

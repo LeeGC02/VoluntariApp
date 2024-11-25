@@ -83,6 +83,8 @@ const ProductPage = () => {
     fetchProducts();
   }, []);
 
+  
+
   const handleAddToCart = (product) => {
     if (product.stock > 0) {
       setShowCart(true);
