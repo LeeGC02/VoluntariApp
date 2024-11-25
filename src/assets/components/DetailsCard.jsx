@@ -1,57 +1,83 @@
-// import React from 'react'
+// import React from "react";
 
 const DetailsCard = () => {
   return (
-    <div>
-      <h3 className="font-extrabold text-xl">Detalles de la Tarjeta</h3>
-      <p>Ingrese los datos de la Tarjeta</p>
-      <div className="flex flex-col items-center justify-center bg-red-200 w-full gap-5">
-        <div className="flex flex-col">
-          <h4 className=" font-semibold text-center">Número de la Tarjeta</h4>
+    <div className="border rounded-md p-6 bg-beige w-[100%] max-w-md mx-auto">
+      <h3 className="font-bold text-2xl text-orangePrincipal mb-4 text-center">
+        Detalles de la Tarjeta
+      </h3>
+      <p className="text-center text-gray-700 mb-6">
+        Por favor, ingresa los datos de tu tarjeta para completar la compra.
+      </p>
+      <div className="flex flex-col gap-1">
+        {/* Número de tarjeta */}
+        <div>
+          <label className="block font-semibold text-gray-600 mb-1">
+            Número de la Tarjeta
+          </label>
           <input
-            className="w-44"
-            type="number"
+            type="text"
             name="card-number"
             id="card-number"
             placeholder="1234 5678 9012 3456"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
         </div>
-        <div className="flex">
-          <div className="flex flex-col">
-            <h4 className=" font-semibold text-center">Mes de Expiración</h4>
-            <select name="month" id="month" required className="w-fit">
-              <option value="enero">01</option>
-              <option value="enero">02</option>
-              <option value="enero">03</option>
-              <option value="enero">04</option>
-              <option value="enero">05</option>
-              <option value="enero">06</option>
-              <option value="enero">07</option>
-              <option value="enero">08</option>
-              <option value="enero">09</option>
-              <option value="enero">10</option>
-              <option value="enero">11</option>
-              <option value="enero">12</option>
+
+        {/* Fecha de expiración */}
+        <div className="flex justify-between ">
+          <div>
+            <label className="block font-semibold text-gray-600 mb-1">
+              Mes de Expiración
+            </label>
+            <select
+              name="month"
+              id="month"
+              required
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            >
+              {Array.from({ length: 12 }, (_, i) => (
+                <option key={i} value={i + 1}>
+                  {String(i + 1).padStart(2, "0")}
+                </option>
+              ))}
             </select>
           </div>
-          <div className="flex flex-col">
-            <h4 className=" font-semibold text-center">Año de Expiración</h4>
-            <select name="month" id="month" required className="w-fit">
-              <option value="enero">2024</option>
-              <option value="enero">2025</option>
-              <option value="enero">2026</option>
-              <option value="enero">2027</option>
-              <option value="enero">2028</option>
-              <option value="enero">2029</option>
-              <option value="enero">2030</option>
+          <div>
+            <label className="block font-semibold text-gray-600 mb-1">
+              Año de Expiración
+            </label>
+            <select
+              name="year"
+              id="year"
+              required
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            >
+              {Array.from({ length: 10 }, (_, i) => (
+                <option key={i} value={2024 + i}>
+                  {2024 + i}
+                </option>
+              ))}
             </select>
-          </div>
-          <div className="flex flex-col">
-            <h4 className=" font-semibold text-center">CVV</h4>
-            <input type="number" name="cvv" id="cvv" placeholder="123" required className="w-12" />
           </div>
         </div>
-        <button className="border p-2 rounded-xl bg-orangePrincipal text-white hover:bg-white hover:text-orangePrincipal">Confirmar</button>
+
+        {/* CVV */}
+        <div>
+          <label className="block font-semibold text-gray-600 mb-1">CVV</label>
+          <input
+            type="text"
+            name="cvv"
+            id="cvv"
+            placeholder="123"
+            className="w-24 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+        </div>
+
+        {/* Botón de Confirmar */}
+        <button className="w-full bg-orange-500 text-white rounded-md py-3 mt-4 hover:bg-orange-600 transition duration-300">
+          Confirmar
+        </button>
       </div>
     </div>
   );

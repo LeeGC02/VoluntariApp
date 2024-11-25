@@ -1,6 +1,6 @@
 //import './FormVolunteer.css';
 import { useState } from "react";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase/firebase.config";
 
 const FormVolunteer = () => {
@@ -52,16 +52,16 @@ const FormVolunteer = () => {
       const docSnap = await getDoc(userDoc);
       if (docSnap.exists()) {
         try {
-          await updateDoc(
-            userDoc,
-            {
-              ...formData,
-              formularioCompletado: true,
-            },
-            { merge: true }
-          );
-          alert("Datos guardados exitosamente");
-          window.location.reload();
+          const userRole = docSnap.data().rol;
+          if(userRole === "volunteer"){
+            const volunteerRef = collection(userDoc, "voluntario");
+            await setDoc(doc(volunteerRef, "perfil"),formData);
+            alert("Datos guardados existosamente");
+            window.location.reload();
+          }
+          else{
+            alert("El usuario no tiene el rol de voluntario.");
+          }
         } catch (error) {
           console.error("Error al guardar datos: ", error);
         }

@@ -12,6 +12,7 @@ import {
     sendPasswordResetEmail,
     fetchSignInMethodsForEmail, 
 } from "firebase/auth";
+import Loading from "../assets/components/Loading";
 
 export const authContext = createContext();
 
@@ -76,7 +77,7 @@ export function AuthProvider ({children}) {
                 checkEmailExists,
             }}
         >
-            {!loading ? children : <div>Cargando...</div>} 
+            {!loading ? children : <Loading/>} 
         </authContext.Provider>
     );
 }

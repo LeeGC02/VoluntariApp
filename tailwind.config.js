@@ -10,6 +10,16 @@ export default {
         beige: "rgb(250, 246, 240)", 
         orangePrincipal: "#e8402a",
       },
+      animation:{
+        pulsar: 'pulsar 3s ease-in-out infinite',
+      },
+      keyframes: {
+        pulsar: {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.1)' },
+          '100%': { transform: 'scale(1)' },
+        },
+      },
     },
   },
   plugins: [],

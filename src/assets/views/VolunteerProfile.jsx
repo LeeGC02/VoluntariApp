@@ -1,4 +1,3 @@
-import "./VolunteerProfile.css";
 import HeaderWebApp from "../components/HeaderWebApp";
 import OrganizationCard from "../components/OrganizationCard";
 import ExperienceCard from "../components/ExperienceCard";
@@ -51,10 +50,10 @@ const VolunteerProfile = () => {
   }));
 
   return (
-    <div className="">
+    <div className="bg-gray-50">
       <HeaderWebApp />
-      <div className="grid-container">
-        <div className="uno">
+      <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-6 gap-6 mt-20 i">
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-6">
           {dataVol.map((vol, index) => (
             <VolunteerDataCard
               key={index}
@@ -67,8 +66,8 @@ const VolunteerProfile = () => {
             />
           ))}
         </div>
-        <div className="dos">
-          <h4>Otras Organizaciones</h4>
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-2">
+          <h4 className="text-xl font-semibold mb-4">Otras Organizaciones</h4>
           {dataOrg.map((org, index) => (
             <OrganizationCard
               key={index}
@@ -77,9 +76,9 @@ const VolunteerProfile = () => {
             />
           ))}
         </div>
-        <div className="tres">
-          <h4>Experiencia de Voluntariado</h4>
-          <div className="tres-otro">
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-2">
+          <h4 className="text-xl font-semibold mb-4">Experiencia de Voluntariado</h4>
+          <div className="space-y-4">
             {dataOrg.map((org, index) => (
               <ExperienceCard
                 key={index}
@@ -89,30 +88,30 @@ const VolunteerProfile = () => {
                 endDate={org.endDate}
               />
             ))}
-            <button className="btn-add-experience">Añadir experiencia +</button>
+            <button className="btn-primary">Añadir experiencia +</button>
           </div>
         </div>
-        <div className="cuatro">
-          <h4>Aptitudes</h4>
-          <SkillCard/>
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-2">
+          <h4 className="text-xl font-semibold mb-4">Aptitudes</h4>
+          <SkillCard />
         </div>
-        <div className="cinco">
-          <h4>Logros de Voluntariado</h4>
-          <div className="cinco-otro">
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-6">
+          <h4 className="text-xl font-semibold mb-4">Logros de Voluntariado</h4>
+          <div className="space-y-4">
             {dataVol.map((vol, index) => (
               <ArchievementCard key={index} archievement={vol.archievement} />
             ))}
-            <button className="btn-add-experience">Añadir Logro +</button>
+            <button className="btn-primary">Añadir Logro +</button>
           </div>
         </div>
-        <div className="seis">
-          <div className="seis-otro">
-            <h4>Comentarios de Voluntariado</h4>
-            <button className="btn-add-experience">Añadir Comentario +</button>
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-6">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-xl font-semibold">Comentarios de Voluntariado</h4>
+            <button className="btn-primary">Añadir Comentario +</button>
           </div>
-          <div className="seis-otro-dos">
-            {combinedData.map((items, index) => {
-              return items.review ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {combinedData.map((items, index) =>
+              items.review ? (
                 <ReviewCard
                   key={index}
                   nameOrg={items.nameOrg}
@@ -120,8 +119,8 @@ const VolunteerProfile = () => {
                   nameVol={items.nameVol}
                   review={items.review}
                 />
-              ) : null;
-            })}
+              ) : null
+            )}
           </div>
         </div>
       </div>

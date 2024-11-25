@@ -1,27 +1,36 @@
-//import React from 'react'
 import { useState, useEffect } from "react";
 import { db, auth } from "../../firebase/firebase.config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import FormVolunteer from "../components/FormVolunteer";
 import HeaderWebApp from "../components/HeaderWebApp";
 import "./VolunteerPage.css";
+import Loading from "../components/Loading";
 
 const VolunteerPage = () => {
   const [formularioCompletado, setFormularioCompletado] = useState(null);
   const [nombreUsuario, setNombreUsuario] = useState("");
+
   useEffect(() => {
     const checkFormularioCompleto = async () => {
       const user = auth.currentUser;
       if (user) {
         const userDoc = doc(db, "usuario", user.uid);
         const docSnap = await getDoc(userDoc);
+
         if (docSnap.exists()) {
           const data = docSnap.data();
-          const isComplete = data.formularioCompletado === true;
-
-          setFormularioCompletado(isComplete);
           setNombreUsuario(data.nombreUsuario || "Voluntario");
-          // setFormularioCompletado(docSnap.data().formularioCompletado || false);
+
+          // Verificar si la subcolección "voluntario" existe
+          const voluntarioRef = collection(userDoc, "voluntario");
+          const voluntarioSnap = await getDocs(voluntarioRef);
+          
+          // Si la subcolección está vacía, se muestra el formulario
+          if (voluntarioSnap.empty) {
+            setFormularioCompletado(false); // No tiene datos en "voluntario", mostrar formulario
+          } else {
+            setFormularioCompletado(true); // Ya tiene datos en "voluntario"
+          }
         } else {
           console.log("No existe el documento del usuario en Firestore");
           setFormularioCompletado(false); // Usuario no tiene datos, se muestra el formulario
@@ -31,6 +40,7 @@ const VolunteerPage = () => {
         setFormularioCompletado(false); // No hay usuario autenticado, se muestra el formulario
       }
     };
+
     checkFormularioCompleto();
   }, []);
 
@@ -65,7 +75,7 @@ const VolunteerPage = () => {
               </p>
             </>
           ) : (
-            <p>Cargando...</p>
+            <Loading/>
           )}
         </main>
       </div>

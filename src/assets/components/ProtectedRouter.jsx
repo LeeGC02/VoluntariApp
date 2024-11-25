@@ -4,6 +4,7 @@ import { useAuth } from '../../context/authContext';
 import { db } from '../../firebase/firebase.config';
 import { doc, getDoc } from 'firebase/firestore';
 import PropTypes from 'prop-types';
+import Loading from './Loading';
 
 const ProtectedRouter = ({children}) => {
   const auth = useAuth();
@@ -37,7 +38,8 @@ const ProtectedRouter = ({children}) => {
   }, [auth.user]);
 
   if (loading) {
-    return <div>Cargando...</div>; 
+    return <Loading/>;
+    // return <div>Cargando...</div>; 
   }
 
   if (!auth.user) {

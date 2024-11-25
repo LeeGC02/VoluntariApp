@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeaderWebApp from "../components/HeaderWebApp";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import ProductCard from "../components/ProductCard";
 import PayCard from "../components/PayCard";
 import ModalPay from "../components/ModalPay";
-import DetailsCard from "../components/DetailsCard";
+import { db } from "../../firebase/firebase.config";
+import {
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+  increment,
+} from "firebase/firestore";
 
 const ProductPage = () => {
   const [cart, setCart] = useState([]);
@@ -12,8 +19,9 @@ const ProductPage = () => {
   const [searchTerm, setSearchTerm] = useState(""); // Estado para la búsqueda
   const [sortOption, setSortOption] = useState("default"); // Estado para el ordenamiento
   const [showModal, setShowModal] = useState(false);
+  const [products, setProducts] = useState([]); // Datos desde Firebase
 
-  const dataProduct = [
+  /*   const dataProduct = [
     {
       id: 1,
       imgProd: "/polera.jpg",
@@ -44,19 +52,54 @@ const ProductPage = () => {
     },
   ];
 
-  const handleAddToCart = (product) => {
-    setShowCart(true);
-    setCart((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+  const uploadProducts = async () => {
+    const productCollection = collection(db, "productos");
+    try {
+      for (const product of dataProduct) {
+        await addDoc(productCollection, product);
+        console.log(`Producto ${product.nameProd} agregado a Firebase`);
       }
-      return [...prevCart, { ...product, quantity: 1 }];
-    });
+    } catch (error) {
+      console.error("Error subiendo productos:", error);
+    }
+  };
+
+  uploadProducts(); */
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productCollection = collection(db, "productos");
+      try {
+        const snapshot = await getDocs(productCollection);
+        const productsData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error obteniendo productos:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleAddToCart = (product) => {
+    if (product.stock > 0) {
+      setShowCart(true);
+      setCart((prevCart) => {
+        const existingProduct = prevCart.find((item) => item.id === product.id);
+        if (existingProduct) {
+          return prevCart.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        }
+        return [...prevCart, { ...product, quantity: 1 }];
+      });
+    } else {
+      alert("No hay suficiente stock para este producto.");
+    }
   };
 
   const handleUpdateQuantity = (productId, increment) => {
@@ -67,7 +110,7 @@ const ProductPage = () => {
             ? { ...item, quantity: item.quantity + increment }
             : item
         )
-        .filter((item) => item.quantity > 0) // Eliminar si cantidad llega a 0
+        .filter((item) => item.quantity > 0)
     );
   };
 
@@ -82,21 +125,38 @@ const ProductPage = () => {
   };
 
   // Filtrar y ordenar productos
-  const filteredAndSortedProducts = dataProduct
+  const filteredAndSortedProducts = products
     .filter((product) =>
       product.nameProd.toLowerCase().includes(searchTerm.toLowerCase())
-    ) // Filtrar por término de búsqueda
+    )
     .sort((a, b) => {
-      if (sortOption === "low") return a.price - b.price; // Ordenar por precio bajo
-      if (sortOption === "high") return b.price - a.price; // Ordenar por precio alto
-      return 0; // Sin ordenamiento
+      if (sortOption === "low") return a.price - b.price;
+      if (sortOption === "high") return b.price - a.price;
+      return 0;
     });
+
+  const updateProductStock = async (productId, quantity) => {
+    const productRef = doc(db, "productos", productId);
+    await updateDoc(productRef, {
+      stock: increment(-quantity), // Reducir la cantidad comprada
+    });
+  };
+
+  const handleConfirmPayment = () => {
+    cart.forEach(async (product) => {
+      await updateProductStock(product.id, product.quantity);
+    });
+  
+    setCart([]); // Vaciar el carrito
+    setShowCart(false); // Cerrar el carrito
+    setShowModal(true); // Mostrar el modal de confirmación
+  };
+  
 
   return (
     <div>
       <HeaderWebApp />
       <main>
-        {/* Barra de búsqueda y filtro */}
         <div className="search-sort flex justify-between items-center">
           <div className="search flex gap-4 items-center m-5">
             <Icon
@@ -128,7 +188,6 @@ const ProductPage = () => {
           </div>
         </div>
 
-        {/* Productos filtrados y ordenados */}
         <div className="product-cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5 bg-beige border rounded-md justify-center items-center">
           {filteredAndSortedProducts.map((product) => (
             <ProductCard
@@ -137,18 +196,18 @@ const ProductPage = () => {
               nameProd={product.nameProd}
               price={product.price}
               sizes={product.sizes}
+              stock={product.stock} // Pasamos el stock al componente
               onAddToCart={() => handleAddToCart(product)}
             />
           ))}
         </div>
 
-        {/* Carrito de compras */}
         {showCart && (
           <PayCard
             cart={cart}
             onUpdateQuantity={handleUpdateQuantity}
             onClose={() => setShowCart(false)}
-            onConfirmPayment={() => setShowModal(true)} // Muestra el modal
+            onConfirmPayment={handleConfirmPayment} // Confirmación de pago
           />
         )}
         {showModal && (
@@ -156,7 +215,7 @@ const ProductPage = () => {
             <div className="bg-white p-5 rounded-lg">
               <ModalPay />
               <button
-                onClick={() => setShowModal(false)} // Cierra el modal
+                onClick={() => setShowModal(false)}
                 className="mt-5 px-4 py-2 bg-orangePrincipal text-white rounded-md"
               >
                 Cerrar
@@ -164,12 +223,8 @@ const ProductPage = () => {
             </div>
           </div>
         )}
-
-        <DetailsCard/> 
       </main>
-
     </div>
-
   );
 };
 

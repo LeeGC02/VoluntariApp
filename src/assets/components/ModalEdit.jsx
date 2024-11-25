@@ -1,4 +1,3 @@
-import "./ModalEdit.css";
 import PropTypes from "prop-types";
 import { doc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase/firebase.config";
@@ -30,9 +29,15 @@ const ModalEdit = ({ show, onClose, data }) => {
     e.preventDefault();
     const user = auth.currentUser;
     if (user) {
-      const userDoc = doc(db, "usuario", user.uid);
-      await updateDoc(userDoc, formData);
-      onClose(); // Cerrar el modal después de guardar
+      const volunteerProfileDoc = doc(
+        db,
+        "usuario",
+        user.uid,
+        "voluntario",
+        "perfil"
+      );
+      await updateDoc(volunteerProfileDoc, formData);
+      onClose();
       window.location.reload();
     }
   };
@@ -44,117 +49,100 @@ const ModalEdit = ({ show, onClose, data }) => {
   if (!show) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>
-          &times;
-        </button>
-        <form onSubmit={handleSubmit}>
-          <h2>Editar Perfil</h2>
-          <div className="editable-field">
-            <label>Nombre Completo:</label>
-            {editMode.nombreCompleto ? (
-              <input
-                type="text"
-                name="nombreCompleto"
-                value={formData.nombreCompleto || ""}
-                onChange={handleChange}
-                onBlur={() => toggleEditMode("nombreCompleto")}
-              />
-            ) : (
-              <span>{formData.nombreCompleto || "No disponible"}</span>
-            )}
-            <Icon
-              icon="line-md:edit"
-              onClick={() => toggleEditMode("nombreCompleto")}
-              style={{ cursor: "pointer", marginLeft: "8px" }}
-            />
-          </div>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div
+        className="bg-white w-11/12 md:w-1/2 lg:w-1/3 p-6 rounded-lg shadow-lg relative "
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="rounded-md p-3 bg-beige ">
+          {/* <button
+            className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+            onClick={onClose}
+          >
+            <Icon icon="mdi:close" className="w-6 h-6" />
+          </button> */}
+          <h2 className="text-xl font-bold text-gray-800 mb-4">
+            Editar Perfil
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {[
+              {
+                label: "Nombre Completo",
+                field: "nombreCompleto",
+                type: "text",
+              },
+              { label: "Habilidades", field: "habilidades", type: "text" },
+              { label: "Ciudad", field: "ciudad", type: "text" },
+              { label: "Edad", field: "edad", type: "number" },
+            ].map(({ label, field, type }) => (
+              <div
+                key={field}
+                className="flex items-center justify-between"
+              >
+                <label className="text-gray-700 font-medium">{label}:</label>
+                <div className="flex items-center text-sm">
+                  {editMode[field] ? (
+                    <input
+                      type={type}
+                      name={field}
+                      value={formData[field] || ""}
+                      onChange={handleChange}
+                      onBlur={() => toggleEditMode(field)}
+                      className="ml-2 p-2 border border-gray-300 rounded-md w-full"
+                    />
+                  ) : (
+                    <span className="ml-2 flex-1">
+                      {formData[field] || "No disponible"}
+                    </span>
+                  )}
+                  <Icon
+                    icon="line-md:edit"
+                    className="text-orangePrincipal cursor-pointer ml-2"
+                    onClick={() => toggleEditMode(field)}
+                  />
+                </div>
+              </div>
+            ))}
 
-          <div className="editable-field">
-            <label>Habilidades:</label>
-            {editMode.habilidades ? (
-              <input
-                type="text"
-                name="habilidades"
-                value={formData.habilidades || ""}
-                onChange={handleChange}
-                onBlur={() => toggleEditMode("habilidades")}
-              />
-            ) : (
-              <span>{formData.habilidades || "No disponible"}</span>
-            )}
-            <Icon
-              icon="line-md:edit"
-              onClick={() => toggleEditMode("habilidades")}
-              style={{ cursor: "pointer", marginLeft: "8px" }}
-            />
-          </div>
+            <div className="flex items-start flex-col">
+              <label className="text-gray-700 font-medium">Acerca de:</label>
+              <div className="flex items-center w-full justify-between text-sm">
+                {editMode.aCerca ? (
+                  <textarea
+                    name="aCerca"
+                    value={formData.aCerca || ""}
+                    onChange={handleChange}
+                    onBlur={() => toggleEditMode("aCerca")}
+                    className="ml-2 p-2 border border-gray-300 rounded-md w-11/12 text-justify "
+                  />
+                ) : (
+                  <p className="w-11/12 text-justify">{formData.aCerca || "No disponible"}</p>
+                )}
+                <Icon
+                  icon="line-md:edit"
+                  className="text-orangePrincipal cursor-pointer ml-2 w=1/5"
+                  onClick={() => toggleEditMode("aCerca")}
+                />
+              </div>
+            </div>
 
-          <div className="editable-field">
-            <label>Ciudad:</label>
-            {editMode.ciudad ? (
-              <input
-                type="text"
-                name="ciudad"
-                value={formData.ciudad || ""}
-                onChange={handleChange}
-                onBlur={() => toggleEditMode("ciudad")}
-              />
-            ) : (
-              <span>{formData.ciudad || "No disponible"}</span>
-            )}
-            <Icon
-              icon="line-md:edit"
-              onClick={() => toggleEditMode("ciudad")}
-              style={{ cursor: "pointer", marginLeft: "8px" }}
-            />
-          </div>
-
-          <div className="editable-field">
-            <label>Edad:</label>
-            {editMode.edad ? (
-              <input
-                type="number"
-                name="edad"
-                value={formData.edad || ""}
-                onChange={handleChange}
-                onBlur={() => toggleEditMode("edad")}
-              />
-            ) : (
-              <span>{formData.edad || "No disponible"}</span>
-            )}
-            <Icon
-              icon="line-md:edit"
-              onClick={() => toggleEditMode("edad")}
-              style={{ cursor: "pointer", marginLeft: "8px" }}
-            />
-          </div>
-
-          <div className="editable-field">
-            <label>Acerca de:</label>
-            {editMode.aCerca ? (
-              <textarea
-                name="aCerca"
-                value={formData.aCerca || ""}
-                onChange={handleChange}
-                onBlur={() => toggleEditMode("aCerca")}
-              />
-            ) : (
-              <p>{formData.aCerca || "No disponible"}</p>
-            )}
-            <Icon
-              icon="line-md:edit"
-              onClick={() => toggleEditMode("aCerca")}
-              style={{ cursor: "pointer", marginLeft: "8px" }}
-            />
-          </div>
-
-          <button type="submit">Guardar Cambios</button>
-          <button type="button" onClick={onClose}>
-            Cancelar
-          </button>
-        </form>
+            <div className="flex justify-end space-x-2">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                className="bg-orange-200 text-orange-600 p-3 rounded-md hover:bg-orange-600 hover:text-orange-200"
+              >
+                Guardar Cambios
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
@@ -163,7 +151,7 @@ const ModalEdit = ({ show, onClose, data }) => {
 ModalEdit.propTypes = {
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  data: PropTypes.object, // Asegúrate de incluir la prop 'data'
+  data: PropTypes.object,
 };
 
 export default ModalEdit;
