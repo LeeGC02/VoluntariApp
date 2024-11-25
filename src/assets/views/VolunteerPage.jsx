@@ -33,34 +33,40 @@ const VolunteerPage = () => {
     };
     checkFormularioCompleto();
   }, []);
+
+  const handleFormComplete = () => {
+    setFormularioCompletado(true); // Cambia el estado a completado
+  };
+
   return (
     <div className="flex h-screen">
-      {/* Slider Bar */}
-      {/* <aside className="w-64 bg-gray-800 text-white flex flex-col">
-        <div className="p-4">
-          <h2 className="text-2xl font-bold">Menú</h2>
+      {formularioCompletado === false && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 flex justify-center items-start pt-20">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg max-h-[80vh] overflow-y-scroll">
+            <h2 className="text-xl font-bold mb-4">Completa tu perfil</h2>
+            <FormVolunteer onComplete={handleFormComplete} />
+          </div>
         </div>
-        <nav className="flex-1 p-4">
-          <ul className="space-y-4">
-            <li><a href="/dashboard" className="hover:text-gray-300">Inicio</a></li>
-            <li><a href="/profile" className="hover:text-gray-300">Mi Perfil</a></li>
-            <li><a href="/notifications" className="hover:text-gray-300">Notificaciones</a></li>
-            <li><a href="/settings" className="hover:text-gray-300">Configuraciones</a></li>
-          </ul>
-        </nav>
-      </aside> */}
-
-      {/* Main Content */}
+      )}
       <div className="flex-1">
         <HeaderWebApp />
         <main className="p-6">
-          <h1 className="text-2xl font-bold">Bienvenid@, {nombreUsuario}!!!</h1>
-          {formularioCompletado === false ? (
-            <FormVolunteer />
+          {formularioCompletado === true ? (
+            <>
+              <h1 className="text-2xl font-bold">
+                Bienvenid@, {nombreUsuario}!!!
+              </h1>
+              <p>Gracias por completar los datos.</p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod,
+                quasi ab veritatis debitis deserunt doloremque itaque mollitia
+                placeat rerum reprehenderit possimus tempore a vel molestiae
+                distinctio. Libero quisquam sit voluptas!
+              </p>
+            </>
           ) : (
-            <p>Gracias por completar los datos.</p>
+            <p>Cargando...</p>
           )}
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, quasi ab veritatis debitis deserunt doloremque itaque mollitia placeat rerum reprehenderit possimus tempore a vel molestiae distinctio. Libero quisquam sit voluptas!</p>
         </main>
       </div>
     </div>

@@ -9,7 +9,8 @@ import {
     signInWithPopup, 
     signOut, 
     onAuthStateChanged, 
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    fetchSignInMethodsForEmail, 
 } from "firebase/auth";
 
 export const authContext = createContext();
@@ -39,6 +40,10 @@ export function AuthProvider ({children}) {
         return () => suscribed()
     }, []);
 
+    const checkEmailExists = async (email) => {
+        const methods = await fetchSignInMethodsForEmail(auth, email);
+        return methods.length > 0; // Devuelve true si el correo ya está registrado
+    };
     const register = async (email, password) => {
         const response = await createUserWithEmailAndPassword (auth, email, password);
         console.log(response);
@@ -68,6 +73,7 @@ export function AuthProvider ({children}) {
                 logout,
                 user,
                 resetPassword,
+                checkEmailExists,
             }}
         >
             {!loading ? children : <div>Cargando...</div>} 
