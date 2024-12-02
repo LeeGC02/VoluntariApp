@@ -161,6 +161,7 @@
   border-radius: 20px;
   padding: 3px 50px;
   color: #fff;
+  justify-content: center;
 }
 .btn-add-experience:hover {
   background-color: #fff;

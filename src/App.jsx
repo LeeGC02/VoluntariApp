@@ -12,6 +12,9 @@ import OrganizationPage from './assets/views/OrganizationPage';
 import VolunteerProfile from './assets/views/VolunteerProfile';
 import ActForm from './assets/views/ActForm';
 import LandingPage from './assets/views/LandingPage';
+import EditarActividad from './assets/components/editarActividad';
+import PostulacionesPage from './assets/views/PostulacionesPage';
+
 
 const App = () => {
   return (
@@ -27,6 +30,9 @@ const App = () => {
           <Route path="/VolunteerPage/VolunteerProfile" element={<ProtectedRouter> <VolunteerProfile /> </ProtectedRouter>} />
           <Route path="/OrganizationPage/ActForm" element={<ActForm />}/>
           <Route path="/LandingPage" element={<LandingPage />}/>
+          <Route path="/OrganizationPage/edit/:tipo/:id" element={<EditarActividad />} />
+          <Route path="/organization/postulaciones/:id" element={<PostulacionesPage />} />
+
         </Routes>
       </div>
     </AuthProvider>
