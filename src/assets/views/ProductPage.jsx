@@ -159,6 +159,7 @@ const ProductPage = () => {
     <div>
       <HeaderWebApp />
       <main>
+        <h3 className="font-bold text-2xl text-orangePrincipal py-3 text-center">Productos Exclusivos de VoluntariApp</h3>
         <div className="search-sort flex justify-between items-center">
           <div className="search flex gap-4 items-center m-5">
             <Icon
@@ -190,7 +191,7 @@ const ProductPage = () => {
           </div>
         </div>
 
-        <div className="product-cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5 bg-beige border rounded-md justify-center items-center">
+        <div className="product-cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 rounded-md justify-center items-center">
           {filteredAndSortedProducts.map((product) => (
             <ProductCard
               key={product.id}
@@ -203,7 +204,7 @@ const ProductPage = () => {
             />
           ))}
         </div>
-
+          
         {showCart && (
           <PayCard
             cart={cart}

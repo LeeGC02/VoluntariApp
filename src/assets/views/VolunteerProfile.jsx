@@ -1,6 +1,4 @@
 import HeaderWebApp from "../components/HeaderWebApp";
-import OrganizationCard from "../components/OrganizationCard";
-import ExperienceCard from "../components/ExperienceCard";
 import ArchievementCard from "../components/ArchievementCard";
 import ReviewCard from "../components/ReviewCard";
 import VolunteerDataCard from "../components/VolunteerDataCard";
@@ -52,8 +50,14 @@ const VolunteerProfile = () => {
   return (
     <div className="bg-gray-50">
       <HeaderWebApp />
-      <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-6 gap-6 mt-20 i">
-        <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-6">
+      <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 gap-6 mt-20">
+        {/* Título */}
+        <h3 className="font-bold text-2xl text-orangePrincipal py-1 text-center md:col-span-6">
+          Perfil del Usuario
+        </h3>
+  
+        {/* Información del Voluntario */}
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-1 md:col-span-4 lg:col-span-6">
           {dataVol.map((vol, index) => (
             <VolunteerDataCard
               key={index}
@@ -66,38 +70,15 @@ const VolunteerProfile = () => {
             />
           ))}
         </div>
-        <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-2">
-          <h4 className="text-xl font-semibold mb-4">Otras Organizaciones</h4>
-          {dataOrg.map((org, index) => (
-            <OrganizationCard
-              key={index}
-              nameOrg={org.nameOrg}
-              descOrg={org.descOrg}
-            />
-          ))}
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-2">
-          <h4 className="text-xl font-semibold mb-4">
-            Experiencia de Voluntariado
-          </h4>
-          <div className="space-y-4">
-            {dataOrg.map((org, index) => (
-              <ExperienceCard
-                key={index}
-                nameOrg={org.nameOrg}
-                descOrg={org.descOrg}
-                startDate={org.startDate}
-                endDate={org.endDate}
-              />
-            ))}
-            <button className="btn-primary">Añadir experiencia +</button>
-          </div>
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-6 col-span-6 md:col-span-2">
+  
+  
+        {/* Aptitudes */}
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-1 md:col-span-2 lg:col-span-3">
           <h4 className="text-xl font-semibold mb-4">Aptitudes</h4>
           <SkillCard />
         </div>
-        <div className="bg-white shadow-md rounded-lg p-6 col-span-6">
+        {/* Logros */}
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-1 md:col-span-4 lg:col-span-3">
           <h4 className="text-xl font-semibold mb-4">Logros de Voluntariado</h4>
           <div className="space-y-4">
             {dataVol.map((vol, index) => (
@@ -105,14 +86,13 @@ const VolunteerProfile = () => {
             ))}
           </div>
         </div>
-        <div className="bg-white shadow-md rounded-lg p-6 col-span-6">
+  
+        {/* Comentarios */}
+        <div className="bg-white shadow-md rounded-lg p-6 col-span-1 md:col-span-6">
           <div className="flex items-center justify-between mb-4">
-            <h4 className="text-xl font-semibold">
-              Comentarios de Voluntariado
-            </h4>
-            <button className="btn-primary">Añadir Comentario +</button>
+            <h4 className="text-xl font-semibold">Comentarios de Voluntariado</h4>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {combinedData.map((items, index) =>
               items.review ? (
                 <ReviewCard
@@ -129,6 +109,8 @@ const VolunteerProfile = () => {
       </div>
     </div>
   );
+  
+  
 };
 
 export default VolunteerProfile;

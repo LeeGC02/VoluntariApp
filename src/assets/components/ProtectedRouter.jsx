@@ -49,9 +49,9 @@ const ProtectedRouter = ({children}) => {
   // Evitar redireccionamientos cíclicos
   if (role === 'volunteer' && !location.pathname.startsWith('/VolunteerPage')) {
     return <Navigate to="/VolunteerPage" />;
-  } else if (role === 'organization' && location.pathname !== '/OrganizationPage') {
+  } else if (role === 'organization' && !location.pathname.startsWith('/OrganizationPage')) {
     return <Navigate to="/OrganizationPage" />;
-  }
+  }  
 
   return children;
 };

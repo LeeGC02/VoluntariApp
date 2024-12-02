@@ -5,7 +5,7 @@ import { db, auth } from "../../firebase/firebase.config";
 import { doc, collection, getDocs } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 
-const HeaderWebApp = () => {
+const HeaderOrganization = () => {
   const [nombreOrgaUsu, setNombreOrgaUsu] = useState("Cargando...");
   const navigate = useNavigate();
 
@@ -16,10 +16,10 @@ const HeaderWebApp = () => {
       if (org) {
         try {
           const userOrgDoc = doc(db, "usuario", org.uid);
-          const organizationRef = collection(userOrgDoc, "voluntario");
+          const organizationRef = collection(userOrgDoc, "organizacion");
           const organizationSnap = await getDocs(organizationRef);
     
-          console.log("Datos de la subcolección 'voluntario':", organizationSnap.docs);
+          console.log("Datos de la subcolección 'organizacion':", organizationSnap.docs);
     
           const perfilOrgDoc = organizationSnap.docs.find(
             (doc) => doc.id === "perfil"
@@ -28,7 +28,7 @@ const HeaderWebApp = () => {
           if (perfilOrgDoc) {
             const perfilOrgData = perfilOrgDoc.data();
             console.log("Datos del perfil:", perfilOrgData);
-            setNombreOrgaUsu(perfilOrgData.nombreUsuario || "voluntario");
+            setNombreOrgaUsu(perfilOrgData.nombreOrgaUsu || "organizacion");
           } else {
             console.log("No se encontró el documento 'perfil'.");
             setNombreOrgaUsu("Organización");
@@ -61,12 +61,13 @@ const HeaderWebApp = () => {
     if (selectedValue === "logout") {
       handleLogout();
     } else if (selectedValue === "profile") {
-      navigate("/VolunteerPage/VolunteerProfile");
+      navigate("/OrganizationPage/OrganizationProfile");
     }
   };
+
   return (
     <div>
-      <header className="flex items-center justify-between bg-orangePrincipal p-4 text-white fixed top-0 left-0 right-0 z-50">
+      <header className="flex items-center justify-between bg-bluePrincipal p-4 text-white fixed top-0 left-0 right-0 z-50">
         <a href="/OrganizationPage" className="flex items-center">
           <div className="flex items-center space-x-2 animate-pulse">
             <img
@@ -80,7 +81,7 @@ const HeaderWebApp = () => {
         <div className="flex gap-4 items-center">
           <div
             className="flex flex-col items-center cursor-pointer gap-1"
-            onClick={() => navigate("/VolunteerPage/ProductPage")}
+            onClick={() => navigate("/OrganizationPage/ProductOrgPage")}
           >
             <Icon icon="dashicons:products" width="20" height="20" className="text-white" />
             <span className="text-sm">Productos</span>
@@ -103,7 +104,7 @@ const HeaderWebApp = () => {
             />
             
             <select
-              className="bg-orangePrincipal text-white border-none rounded-md text-sm px-2 cursor-pointer focus:outline-none w-fit"
+              className="bg-bluePrincipal text-white border-none rounded-md text-sm px-2 cursor-pointer focus:outline-none w-fit"
               name="pro"
               id="pro"
               onChange={handleProfileChange}
@@ -122,4 +123,4 @@ const HeaderWebApp = () => {
   );
 };
 
-export default HeaderWebApp;
+export default HeaderOrganization;

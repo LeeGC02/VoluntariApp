@@ -75,11 +75,11 @@ const VolunteerDataCard = () => {
     <div className="data-vol-container">
       <div className="portrate"></div>
       <img
-        className="absolute h-40 w-40 rounded-full border-4 border-white z-20 top-36"
+        className="absolute h-40 w-40 rounded-full border-4 border-white z-20 top-56"
         src="/VoluntariAppLogo.png"
         alt="avatar-volunteer"
       />
-      <div className="container-data flex flex-col gap-3">
+      <div className="container-data flex flex-col gap-3 mt-7">
         <h3 className="text-xl font-bold">
           {volunteerData?.nombreCompleto || "Nombre Completo"}
         </h3>

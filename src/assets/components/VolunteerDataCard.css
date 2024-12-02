@@ -13,7 +13,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 70px;
 }
 .photo-vol{
   height: 160px;

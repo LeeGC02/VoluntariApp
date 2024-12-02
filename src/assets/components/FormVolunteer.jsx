@@ -20,7 +20,19 @@ const FormVolunteer = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    let formattedValue = value;
+
+    if (name === "telefono" || name === "edad") {
+      // Restringir solo números
+      formattedValue = value.replace(/\D/g, "");
+    }
+
+    setFormData({ ...formData, [name]: formattedValue });
+
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
   const validateFields = () => {
     const newErrors = {};
@@ -73,7 +85,7 @@ const FormVolunteer = () => {
 
   return (
     <form
-      className="form-container bg-beige rounded-md p-3"
+      className="form-container bg-beige rounded-md p-3 flex flex-col gap-3"
       onSubmit={handleSubmit}
     >
       <div className="group-form-register block text-sm/6 font-medium text-gray-900">
@@ -109,7 +121,7 @@ const FormVolunteer = () => {
           }`}
         />
         {errors.nombreUsuario && (
-          <p className="text-red-500 text-xs mt-1">{errors.nombreCompleto}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.nombreUsuario}</p>
         )}
       </div>
       <div className="group-form-register">
@@ -118,8 +130,9 @@ const FormVolunteer = () => {
         </label>
         <input
           name="telefono"
-          type="number"
+          type="text"
           placeholder="12345678"
+          maxLength={8} 
           value={formData.telefono}
           onChange={handleChange}
           className={`input-form-register block w-full rounded-md border-0 p-1.5 text-gray-900 font-light ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orangePrincipal sm:text-sm/6 caret-red-500 ${
@@ -235,7 +248,7 @@ const FormVolunteer = () => {
           </option>
         </select>
         {errors.nivelEducacion && (
-          <p className="text-red-500 text-xs mt-1">{errors.telefono}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.nivelEducacion}</p>
         )}
       </div>
       <div className="group-form-register">

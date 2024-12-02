@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const ProductCard = ({ imgProd, nameProd, price, sizes, stock, onAddToCart }) => {
   return (
-    <div className=" g border rounded-md border-orange-600 p-4">
+    <div className=" g border rounded-md border-orange-200 p-4 bg-beige">
       <div className="flex justify-center text-center w-full h-50"> 
         <img
           className="w-40 h-40"

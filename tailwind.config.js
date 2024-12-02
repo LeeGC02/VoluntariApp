@@ -9,6 +9,7 @@ export default {
       colors: {
         beige: "rgb(250, 246, 240)", 
         orangePrincipal: "#e8402a",
+        bluePrincipal: "#0f7c9b"
       },
       animation:{
         pulsar: 'pulsar 3s ease-in-out infinite',

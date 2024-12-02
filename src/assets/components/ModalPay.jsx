@@ -29,6 +29,7 @@ const ModalPay = () => {
               </div>
               <span className="mt-3 font-semibold">Pago por Tarjeta</span>
             </div>
+            
 
             {/* Pago con QR */}
             <div

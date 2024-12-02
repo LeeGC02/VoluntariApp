@@ -1,5 +1,6 @@
 // import React from "react";
 
+
 const DetailsCard = () => {
   return (
     <div className="border rounded-md p-6 bg-beige w-[100%] max-w-md mx-auto">
@@ -28,7 +29,7 @@ const DetailsCard = () => {
         <div className="flex justify-between ">
           <div>
             <label className="block font-semibold text-gray-600 mb-1">
-              Mes de Expiración
+              Mes que Expira
             </label>
             <select
               name="month"
@@ -45,7 +46,7 @@ const DetailsCard = () => {
           </div>
           <div>
             <label className="block font-semibold text-gray-600 mb-1">
-              Año de Expiración
+              Año que Expira
             </label>
             <select
               name="year"

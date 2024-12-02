@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db, auth } from "../../firebase/firebase.config";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { doc, collection, getDocs } from "firebase/firestore";
 import FormVolunteer from "../components/FormVolunteer";
 import HeaderWebApp from "../components/HeaderWebApp";
 import "./VolunteerPage.css";
@@ -14,35 +14,42 @@ const VolunteerPage = () => {
     const checkFormularioCompleto = async () => {
       const user = auth.currentUser;
       if (user) {
-        const userDoc = doc(db, "usuario", user.uid);
-        const docSnap = await getDoc(userDoc);
-
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setNombreUsuario(data.nombreUsuario || "Voluntario");
-
-          // Verificar si la subcolección "voluntario" existe
+        try {
+          const userDoc = doc(db, "usuario", user.uid);
           const voluntarioRef = collection(userDoc, "voluntario");
           const voluntarioSnap = await getDocs(voluntarioRef);
-          
-          // Si la subcolección está vacía, se muestra el formulario
-          if (voluntarioSnap.empty) {
-            setFormularioCompletado(false); // No tiene datos en "voluntario", mostrar formulario
+
+          if (!voluntarioSnap.empty) {
+            // Buscar el documento "perfil" en la subcolección "voluntario"
+            const perfilDoc = voluntarioSnap.docs.find(
+              (doc) => doc.id === "perfil"
+            );
+
+            if (perfilDoc && perfilDoc.exists()) {
+              const perfilData = perfilDoc.data();
+              setNombreUsuario(perfilData.nombreUsuario || "voluntario");
+              setFormularioCompletado(true);
+            } else {
+              console.log("No se encontró el documento 'perfil' en voluntario.");
+              setFormularioCompletado(false);
+            }
           } else {
-            setFormularioCompletado(true); // Ya tiene datos en "voluntario"
+            console.log("La subcolección 'voluntario' está vacía.");
+            setFormularioCompletado(false);
           }
-        } else {
-          console.log("No existe el documento del usuario en Firestore");
-          setFormularioCompletado(false); // Usuario no tiene datos, se muestra el formulario
+        } catch (error) {
+          console.error("Error al obtener datos de Firestore:", error);
+          setFormularioCompletado(false);
         }
       } else {
         console.log("No hay usuario autenticado");
-        setFormularioCompletado(false); // No hay usuario autenticado, se muestra el formulario
+        setFormularioCompletado(false);
       }
     };
 
     checkFormularioCompleto();
   }, []);
+
 
   const handleFormComplete = () => {
     setFormularioCompletado(true); // Cambia el estado a completado
@@ -53,16 +60,26 @@ const VolunteerPage = () => {
       {formularioCompletado === false && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 flex justify-center items-start pt-20">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg max-h-[80vh] overflow-y-scroll">
-            <h2 className="text-xl font-bold mb-4">Completa tu perfil</h2>
+            <h1 className="text-orangePrincipal font-bold text-2xl text-center">¡Bienvenido a VoluntariApp!</h1>
+            <p className="text-sm py-3 text-justify text">
+              Antes de empezar, necesitamos que completes tu perfil. Esto es
+              crucial para que las organizaciones puedan conocerte mejor y
+              ofrecerte oportunidades de voluntariado que se ajusten a tus
+              habilidades e intereses.
+            </p>
+            <h2 className="text-xl font-semibold mb-4 text-justify">
+              ¡Completa tu perfil y empieza a hacer la diferencia!
+            </h2>
+
             <FormVolunteer onComplete={handleFormComplete} />
           </div>
         </div>
       )}
       <div className="flex-1">
-        <HeaderWebApp />
-        <main className="p-6">
-          {formularioCompletado === true ? (
-            <>
+        {formularioCompletado === true ? (
+          <>
+            <HeaderWebApp />
+            <main className="p-6">
               <h1 className="text-2xl font-bold">
                 Bienvenid@, {nombreUsuario}!!!
               </h1>
@@ -73,11 +90,11 @@ const VolunteerPage = () => {
                 placeat rerum reprehenderit possimus tempore a vel molestiae
                 distinctio. Libero quisquam sit voluptas!
               </p>
-            </>
-          ) : (
-            <Loading/>
-          )}
-        </main>
+            </main>
+          </>
+        ) : (
+          <Loading />
+        )}
       </div>
     </div>
   );
