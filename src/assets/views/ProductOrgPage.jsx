@@ -6,10 +6,12 @@ import { Icon } from "@iconify/react";
 
 const ProductOrgPage = () => {
   const [formData, setFormData] = useState({
-    nombre: "",
-    precio: "",
-    descripcion: "",
-    categoria: "",
+    imgProd: "",
+    nameProd: "",
+    price: "",
+    sizes: [],
+    stock: "",
+    onAddToCart: "",
   });
   const [showModal, setShowModal] = useState(false);
   const [productos, setProductos] = useState([]);
@@ -18,32 +20,32 @@ const ProductOrgPage = () => {
     const fetchProductos = async () => {
       const user = auth.currentUser;
       if (user) {
-        // Crear la referencia a la colección de productos
         const productosCollection = collection(db, "productos");
-
-        // Crear una consulta para filtrar los productos por el organizacionId
         const q = query(productosCollection, where("organizacionId", "==", user.uid));
-
-        // Ejecutar la consulta y obtener los productos
         const querySnapshot = await getDocs(q);
-        
-        // Mapear los documentos de la consulta a un array
-        const productosList = querySnapshot.docs.map(doc => ({
+        const productosList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-
-        // Establecer los productos en el estado
         setProductos(productosList);
       }
     };
 
     fetchProductos();
-  }, []); // Este efecto solo se ejecuta cuando el componente se monta
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleAddSize = (size) => {
+    if (size && !formData.sizes.includes(size)) {
+      setFormData((prev) => ({
+        ...prev,
+        sizes: [...prev.sizes, size],
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -51,28 +53,24 @@ const ProductOrgPage = () => {
     const user = auth.currentUser;
     if (user) {
       try {
-        // Obtener la referencia de la colección de productos de la organización
         const productosCollection = collection(db, "productos");
-
-        // Agregar el producto a la base de datos
         await addDoc(productosCollection, {
           ...formData,
-          organizacionId: user.uid, // Asociamos el producto con la organización
+          organizacionId: user.uid,
           creadoEn: new Date(),
         });
 
-        // Limpiar formulario después de enviar
         setFormData({
-          nombre: "",
-          precio: "",
-          descripcion: "",
-          categoria: "",
+          imgProd: "",
+          nameProd: "",
+          price: "",
+          sizes: [],
+          stock: "",
+          onAddToCart: "",
         });
-        // Cerrar el modal
         setShowModal(false);
 
-        // Actualizar la lista de productos (agregar el nuevo producto)
-        setProductos(prevProductos => [
+        setProductos((prevProductos) => [
           ...prevProductos,
           { ...formData, organizacionId: user.uid, creadoEn: new Date() },
         ]);
@@ -89,9 +87,8 @@ const ProductOrgPage = () => {
     <div>
       <HeaderOrganization />
       <main className="p-6">
-      <h3 className="font-bold text-2xl text-bluePrincipal py-3 text-center">Tienda de Productos</h3>
+        <h2 className="text-2xl font-semibold mb-6">Tienda de Productos</h2>
 
-        {/* Botón para abrir el modal */}
         <button
           onClick={() => setShowModal(true)}
           className="bg-blue-200 text-blue-600 p-3 rounded-md hover:bg-blue-600 hover:text-blue-200 mb-6"
@@ -100,18 +97,29 @@ const ProductOrgPage = () => {
           Agregar Producto
         </button>
 
-        {/* Modal de agregar producto */}
         {showModal && (
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
               <h2 className="text-xl font-semibold mb-4">Agregar Producto</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex flex-col">
+                  <label className="text-gray-700 font-medium">URL de la Imagen:</label>
+                  <input
+                    type="text"
+                    name="imgProd"
+                    value={formData.imgProd}
+                    onChange={handleChange}
+                    className="p-2 border border-gray-300 rounded-md"
+                    required
+                  />
+                </div>
+
+                <div className="flex flex-col">
                   <label className="text-gray-700 font-medium">Nombre del Producto:</label>
                   <input
                     type="text"
-                    name="nombre"
-                    value={formData.nombre}
+                    name="nameProd"
+                    value={formData.nameProd}
                     onChange={handleChange}
                     className="p-2 border border-gray-300 rounded-md"
                     required
@@ -122,8 +130,8 @@ const ProductOrgPage = () => {
                   <label className="text-gray-700 font-medium">Precio:</label>
                   <input
                     type="number"
-                    name="precio"
-                    value={formData.precio}
+                    name="price"
+                    value={formData.price}
                     onChange={handleChange}
                     className="p-2 border border-gray-300 rounded-md"
                     required
@@ -131,23 +139,52 @@ const ProductOrgPage = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="text-gray-700 font-medium">Descripción:</label>
-                  <textarea
-                    name="descripcion"
-                    value={formData.descripcion}
-                    onChange={handleChange}
-                    className="p-2 border border-gray-300 rounded-md"
-                    rows="4"
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-col">
-                  <label className="text-gray-700 font-medium">Categoría:</label>
+                  <label className="text-gray-700 font-medium">Tamaños (opcional):</label>
                   <input
                     type="text"
-                    name="categoria"
-                    value={formData.categoria}
+                    placeholder="Ejemplo: S, M, L"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAddSize(e.target.value);
+                        e.target.value = "";
+                      }
+                    }}
+                    className="p-2 border border-gray-300 rounded-md"
+                  />
+                  <p className="mt-1 text-gray-500">
+                    Presiona *Enter* para agregar cada tamaño.
+                  </p>
+                  <ul className="mt-2 flex flex-wrap gap-2">
+                    {formData.sizes.map((size, idx) => (
+                      <li
+                        key={idx}
+                        className="bg-gray-200 px-3 py-1 rounded-md text-sm"
+                      >
+                        {size}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="text-gray-700 font-medium">Stock:</label>
+                  <input
+                    type="number"
+                    name="stock"
+                    value={formData.stock}
+                    onChange={handleChange}
+                    className="p-2 border border-gray-300 rounded-md"
+                    required
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="text-gray-700 font-medium">On Add To Cart:</label>
+                  <input
+                    type="text"
+                    name="onAddToCart"
+                    value={formData.onAddToCart}
                     onChange={handleChange}
                     className="p-2 border border-gray-300 rounded-md"
                     required
@@ -174,17 +211,23 @@ const ProductOrgPage = () => {
           </div>
         )}
 
-        {/* Mostrar los productos agregados */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {productos.map((producto, index) => (
+          {productos.map((producto) => (
             <div
-              key={index}
+              key={producto.id}
               className="bg-white p-4 border rounded-md shadow-md"
             >
-              <h3 className="text-lg font-semibold">{producto.nombre}</h3>
-              <p className="text-gray-600">{producto.descripcion}</p>
-              <p className="text-bluePrincipal font-semibold mt-2">{producto.precio}Bs</p>
-              <p className="text-gray-500">Categoría: {producto.categoria}</p>
+              <img
+                src={producto.imgProd}
+                alt={producto.nameProd}
+                className="w-full h-32 object-cover rounded-md mb-4"
+              />
+              <h3 className="text-lg font-semibold">{producto.nameProd}</h3>
+              <p className="text-gray-600">{producto.price}Bs</p>
+              <p className="text-gray-500">Stock: {producto.stock}</p>
+              <p className="text-gray-500">
+                Tamaños: {producto.sizes?.join(", ") || "No especificado"}
+              </p>
             </div>
           ))}
         </div>

@@ -71,7 +71,9 @@ const VolunteerProfile = () => {
           ))}
         </div>
   
-  
+        <h3 className="font-bold text-xl text-orangePrincipal text-start md:col-span-6">
+          Características del voluntario
+        </h3>
         {/* Aptitudes */}
         <div className="bg-white shadow-md rounded-lg p-6 col-span-1 md:col-span-2 lg:col-span-3">
           <h4 className="text-xl font-semibold mb-4">Aptitudes</h4>
